@@ -12,9 +12,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || '0810';
+const PORT = process.env.PORT || '8010';
 const PUBLIC_PATH = path.join(__dirname, '..', 'public');
-
 
 // Serve static files from the 'public' directory
 app.use(express.static(PUBLIC_PATH));

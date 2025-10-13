@@ -1,10 +1,11 @@
 import js from '@eslint/js';
+import prettier from 'eslint-config-prettier';
+import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
   {
     ignores: [
       'node_modules/',
-      'public/',
       '*.min.js',
       '*.bundle.js',
       'coverage/',
@@ -14,8 +15,12 @@ export default [
     ]
   },
   js.configs.recommended,
+  prettier,
   {
-    files: ['src/**/*.js'],
+    files: ['**/*.js'],
+    plugins: {
+      prettier: prettierPlugin
+    },
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -25,18 +30,16 @@ export default [
         Buffer: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
-        global: 'readonly'
+        global: 'readonly',
+        document: 'readonly',
+        window: 'readonly',
+        fetch: 'readonly'
       }
     },
     rules: {
+      'prettier/prettier': ['error', {}, { usePrettierrc: true }],
       'no-unused-vars': 'warn',
-      'no-console': 'off',
-      'semi': ['error', 'always'],
-      'quotes': ['error', 'single'],
-      'indent': ['error', 2],
-      'comma-dangle': ['error', 'never'],
-      'no-trailing-spaces': 'error',
-      'eol-last': 'error'
+      'no-console': 'off'
     }
   }
 ];
