@@ -1,0 +1,16 @@
+{
+	"name": "baby-cam",
+	"version": "1.0.0",
+	"description": "A Node.js application",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "node index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"engines": {
+		"node": ">=14.0.0"
+	}
+}
