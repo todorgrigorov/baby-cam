@@ -1,0 +1,9 @@
+{
+	"name": "Baby Cam",
+	"short_name": "Baby Cam",
+	"start_url": "/index.html",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"theme_color": "#317EFB",
+	"icons": []
+}

@@ -1,16 +1,15 @@
 class App {
   constructor() {
     this.ws = new WebSocket(`ws://${location.host}`);
-    // this.pcConfig = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
     this.pcConfig = {};
     this.role = null;
     this.pc = null;
     this.localStream = null;
 
-    this.init();
+    this.handleWS();
   }
 
-  async init() {
+  async handleWS() {
     this.ws.onmessage = async e => {
       const data = JSON.parse(e.data);
       console.log('Received message:', data);
