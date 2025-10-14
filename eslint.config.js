@@ -33,7 +33,12 @@ export default [
         global: 'readonly',
         document: 'readonly',
         window: 'readonly',
-        fetch: 'readonly'
+        location: 'readonly',
+        navigator: 'readonly',
+        fetch: 'readonly',
+        WebSocket: 'readonly',
+        RTCPeerConnection: 'readonly',
+        RTCSessionDescription: 'readonly'
       }
     },
     rules: {
