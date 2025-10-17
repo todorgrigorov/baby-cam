@@ -4,14 +4,35 @@
 	box-sizing: border-box;
 }
 
+/* Theme variables */
+:root {
+	--bg-gradient-start: #f6f8ff;
+	--bg-gradient-end: #ffffff;
+	--card-bg: #ffffff;
+	--text-primary: #0f172a;
+	--muted: #6b7280;
+	--primary-600: #667eea;
+	--primary-700: #764ba2;
+	--border: rgba(100, 100, 140, 0.08);
+	--shadow-1: 0 8px 24px rgba(20, 20, 50, 0.08);
+	--shadow-2: 0 6px 18px rgba(20, 20, 50, 0.08);
+	--btn-bg-start: #ffffff;
+	--btn-bg-end: #f3f4ff;
+	--btn-text: #0f172a;
+	--card-section-bg: rgba(102,126,234,0.03);
+	--video-bg: #000000;
+}
+
 body {
 	min-height: 100vh;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	background: linear-gradient(180deg, #f6f8ff 0%, #ffffff 100%);
+	background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+	color: var(--text-primary);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 24px;
+	transition: background-color 240ms ease, color 240ms ease;
 }
 
 .app {
@@ -21,11 +42,12 @@ body {
 }
 
 .card {
-	background: white;
+	background: var(--card-bg);
 	border-radius: 14px;
-	box-shadow: 0 8px 24px rgba(20, 20, 50, 0.08);
+	box-shadow: var(--shadow-1);
 	padding: 18px;
 	overflow: hidden;
+	transition: background-color 200ms ease, box-shadow 200ms ease;
 }
 
 .video-container {
@@ -33,6 +55,9 @@ body {
 	align-items: center;
 	justify-content: center;
 	padding: 12px;
+	/* subtle section background to separate it from the card */
+	background: var(--card-section-bg);
+	border-radius: 10px;
 }
 
 .header {
@@ -45,12 +70,12 @@ body {
 
 h1 {
 	margin: 0;
-	font-size: 1.25rem;
-	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+	font-size: 1.75rem;
+	background: linear-gradient(90deg, var(--primary-600) 0%, var(--primary-700) 100%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 video {
@@ -59,9 +84,10 @@ video {
 	/* Use aspect-ratio to keep the player compact and predictable */
 	aspect-ratio: 16 / 9;
 	border-radius: 10px;
-	background: #000;
+	background: var(--video-bg);
 	object-fit: cover;
-	box-shadow: 0 6px 18px rgba(20, 20, 50, 0.08);
+	box-shadow: var(--shadow-2);
+	transition: box-shadow 200ms ease, background-color 200ms ease;
 }
 
 .camera-switch-btn {
@@ -70,12 +96,14 @@ video {
 	gap: 8px;
 	padding: 8px 12px;
 	border-radius: 10px;
-	background: linear-gradient(180deg, #ffffff 0%, #f3f4ff 100%);
-	border: 1px solid rgba(100, 100, 140, 0.08);
+	background: linear-gradient(180deg, var(--btn-bg-start) 0%, var(--btn-bg-end) 100%);
+	border: 1px solid var(--border);
 	cursor: pointer;
 	box-shadow: 0 4px 10px rgba(100, 100, 140, 0.06);
-	transition: transform 120ms ease, box-shadow 120ms ease;
+	transition: transform 120ms ease, box-shadow 120ms ease, background-color 200ms ease;
 	font-size: 0.95rem;
+	color: var(--btn-text);
+	font-weight: 600;
 }
 
 .camera-switch-btn:active {
@@ -91,6 +119,25 @@ video {
 	font-size: 1.05rem;
 }
 
+/* Center the title while keeping the button on the right */
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+}
+
+.header h1 {
+	margin: 0;
+	pointer-events: auto;
+}
+
+.header-actions {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
@@ -100,10 +147,42 @@ video {
 	}
 
 	h1 {
-		font-size: 1.3rem;
+		font-size: 1.4rem;
 	}
 
 	body {
 		padding: 20px;
+	}
+}
+
+/* Dark mode: follows OS preference */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-gradient-start: #071024;
+		--bg-gradient-end: #071022;
+		--card-bg: #0b1220;
+		--text-primary: #e6eef8;
+		--muted: #9aa6bd;
+		--primary-600: #7ea3ff;
+		--primary-700: #9b71ff;
+		--border: rgba(150, 160, 200, 0.06);
+		--shadow-1: 0 8px 24px rgba(2, 6, 23, 0.6);
+		--shadow-2: 0 6px 18px rgba(2, 6, 23, 0.6);
+		--btn-bg-start: #122033;
+		--btn-bg-end: #0d2738;
+		--btn-text: #eaf4ff;
+		--card-section-bg: rgba(255,255,255,0.02);
+		--video-bg: #020204;
+	}
+
+	.card {
+		box-shadow: var(--shadow-1);
+	}
+
+	.camera-switch-btn {
+			box-shadow: 0 4px 14px rgba(2, 6, 23, 0.45);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: var(--btn-text);
+			background: linear-gradient(180deg, var(--btn-bg-start) 0%, var(--btn-bg-end) 100%);
 	}
 }
