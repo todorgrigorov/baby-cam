@@ -19,7 +19,7 @@
 	--btn-bg-start: #ffffff;
 	--btn-bg-end: #f3f4ff;
 	--btn-text: #0f172a;
-	--card-section-bg: rgba(102,126,234,0.03);
+	--card-section-bg: rgba(102, 126, 234, 0.03);
 	--video-bg: #000000;
 }
 
@@ -171,7 +171,7 @@ video {
 		--btn-bg-start: #122033;
 		--btn-bg-end: #0d2738;
 		--btn-text: #eaf4ff;
-		--card-section-bg: rgba(255,255,255,0.02);
+		--card-section-bg: rgba(255, 255, 255, 0.02);
 		--video-bg: #020204;
 	}
 
@@ -180,9 +180,9 @@ video {
 	}
 
 	.camera-switch-btn {
-			box-shadow: 0 4px 14px rgba(2, 6, 23, 0.45);
-			border: 1px solid rgba(255, 255, 255, 0.08);
-			color: var(--btn-text);
-			background: linear-gradient(180deg, var(--btn-bg-start) 0%, var(--btn-bg-end) 100%);
+		box-shadow: 0 4px 14px rgba(2, 6, 23, 0.45);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		color: var(--btn-text);
+		background: linear-gradient(180deg, var(--btn-bg-start) 0%, var(--btn-bg-end) 100%);
 	}
 }

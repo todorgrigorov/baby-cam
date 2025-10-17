@@ -1,8 +1,23 @@
 {
 	"name": "Baby Cam",
 	"short_name": "Baby Cam",
-	"start_url": "/index.html",
+	"description": "A simple live camera viewer to keep an eye on your baby - lightweight WebRTC-based streaming.",
+	"start_url": "./",
+	"scope": "./",
 	"display": "standalone",
-	"background_color": "#fff",
-	"icons": []
+	"orientation": "portrait",
+	"background_color": "#ffffff",
+	"theme_color": "#667eea",
+	"icons": [
+		{
+			"src": "./icons/icon-192.svg",
+			"sizes": "192x192",
+			"type": "image/svg+xml"
+		},
+		{
+			"src": "./icons/icon-512.svg",
+			"sizes": "512x512",
+			"type": "image/svg+xml"
+		}
+	]
 }

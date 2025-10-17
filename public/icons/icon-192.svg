@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" role="img" aria-label="Baby Cam icon">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7ea3ff"/>
+      <stop offset="100%" stop-color="#9b71ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="28" fill="url(#g)" />
+  <!-- face -->
+  <circle cx="96" cy="96" r="46" fill="#fff9f6" />
+  <!-- hair curl -->
+  <!-- eyebrows (aligned above eyes) -->
+  <path d="M72 82 q8 -6 16 0" fill="none" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M104 82 q8 -6 16 0" fill="none" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- eyes -->
+  <circle cx="80" cy="96" r="6" fill="#2b2b2b" />
+  <circle cx="112" cy="96" r="6" fill="#2b2b2b" />
+  <!-- smile -->
+  <path d="M78 114c6 6 30 6 36 0" fill="none" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round"/>
+</svg>
