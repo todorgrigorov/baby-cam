@@ -2,53 +2,95 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	overflow: hidden;
 }
 
 body {
-	height: 100vh;
-	width: 100vw;
+	min-height: 100vh;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	background: linear-gradient(180deg, #f6f8ff 0%, #ffffff 100%);
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 40px;
+	padding: 24px;
+}
+
+.app {
+	width: 100%;
+	max-width: 980px;
+	padding: 16px;
+}
+
+.card {
+	background: white;
+	border-radius: 14px;
+	box-shadow: 0 8px 24px rgba(20, 20, 50, 0.08);
+	padding: 18px;
+	overflow: hidden;
 }
 
 .video-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 12px;
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: 15px;
-	margin-bottom: 20px;
-	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 12px;
 }
 
 h1 {
 	margin: 0;
-	color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	font-size: 1.5rem;
+	font-size: 1.25rem;
+	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	font-weight: 600;
 }
 
 video {
 	width: 100%;
-	height: 100%;
-	object-fit: contain;
+	max-width: 720px;
+	/* Use aspect-ratio to keep the player compact and predictable */
+	aspect-ratio: 16 / 9;
+	border-radius: 10px;
+	background: #000;
+	object-fit: cover;
+	box-shadow: 0 6px 18px rgba(20, 20, 50, 0.08);
 }
 
 .camera-switch-btn {
-	padding: 5px 10px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 10px;
+	background: linear-gradient(180deg, #ffffff 0%, #f3f4ff 100%);
+	border: 1px solid rgba(100, 100, 140, 0.08);
+	cursor: pointer;
+	box-shadow: 0 4px 10px rgba(100, 100, 140, 0.06);
+	transition: transform 120ms ease, box-shadow 120ms ease;
+	font-size: 0.95rem;
 }
+
+.camera-switch-btn:active {
+	transform: translateY(1px) scale(0.997);
+}
+
+.camera-switch-btn[disabled] {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.camera-switch-btn .icon {
+	font-size: 1.05rem;
+}
+
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
