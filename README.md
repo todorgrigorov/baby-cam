@@ -1,9 +1,10 @@
 # Baby Cam 👶📷
 
-A real-time video streaming application that enables one-to-many video broadcasting using WebRTC technology. Perfect for baby monitoring, remote surveillance, or any scenario where you need to stream live video from one device to multiple viewers.
+A real-time video streaming application that enables one-to-many video broadcasting using WebRTC technology. **Privacy-focused design ensures your video data never passes through intermediary servers** - all streaming is direct peer-to-peer. Perfect for baby monitoring, remote surveillance, or any scenario where you need to stream live video from one device to multiple viewers while maintaining complete privacy.
 
 ## 🌟 Features
 
+- **🔒 Privacy-First Streaming**: Direct peer-to-peer video transmission with no intermediary storage or access
 - **Real-time Video Streaming**: Uses WebRTC for low-latency, peer-to-peer video transmission
 - **Leader/Viewer Architecture**: One broadcaster (leader) streams to multiple viewers
 - **Camera Switching**: Leaders can toggle between front and back cameras on mobile devices
@@ -133,8 +134,15 @@ The project uses:
 
 WebRTC support is required for video streaming functionality.
 
-## 🔒 Security Considerations
+## 🔒 Privacy & Security
 
+### Privacy Protection
+- **No Data Storage**: Video streams are never stored on any server or intermediary
+- **Direct P2P Connection**: All video data flows directly between devices using WebRTC
+- **No Third-Party Access**: No external services can access or monitor your video streams
+- **Local Processing Only**: Video capture and transmission happen entirely on your devices
+
+### Security Considerations
 - The application currently runs over HTTP for development
 - For production deployment, use HTTPS to ensure WebRTC functionality
 - Consider implementing authentication for access control
@@ -182,7 +190,15 @@ ISC License
 
 1. Leader connects and gains camera access
 2. Viewer connects and creates offer
-3. Server routes offer to leader
+3. Server routes offer to leader (metadata only - no video data)
 4. Leader creates answer with video stream
 5. ICE candidates are exchanged for NAT traversal
-6. Direct peer-to-peer video connection established
+6. **Direct peer-to-peer video connection established - video never touches the server**
+
+### Privacy Architecture
+
+The application uses a **signaling-only server** approach:
+- Server only handles connection metadata and signaling messages
+- **Zero video data passes through the server**
+- All video streams are direct device-to-device connections
+- Server acts purely as a "phone book" to help devices find each other
