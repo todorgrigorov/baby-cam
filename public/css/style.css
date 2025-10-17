@@ -59,7 +59,6 @@ video {
 	font-size: 28px;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 	z-index: 10;
 	display: flex;
 	align-items: center;
@@ -72,7 +71,6 @@ video {
 .camera-switch-btn:hover {
 	background: rgba(255, 255, 255, 1);
 	transform: scale(1.05);
-	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Better mobile touch feedback */
@@ -94,11 +92,11 @@ video {
 		gap: 10px;
 		margin-bottom: 15px;
 	}
-	
+
 	h1 {
 		font-size: 1.3rem;
 	}
-	
+
 	.camera-switch-btn {
 		width: 55px;
 		height: 55px;
@@ -106,7 +104,7 @@ video {
 		min-height: 55px;
 		font-size: 24px;
 	}
-	
+
 	body {
 		padding: 20px;
 	}
