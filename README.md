@@ -156,7 +156,7 @@ The application works out-of-the-box on local networks. All devices on the same 
 
 ### Production Deployment
 
-1. Ensure HTTPS is configured
+1. Ensure HTTPS is configured -- `.pem` certificates
 2. Configure appropriate TURN servers for WebRTC
 3. Set the `PORT` environment variable
 4. Consider using a process manager like PM2

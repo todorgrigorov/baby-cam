@@ -39,7 +39,9 @@ export default [
         fetch: 'readonly',
         WebSocket: 'readonly',
         RTCPeerConnection: 'readonly',
-        RTCSessionDescription: 'readonly'
+        RTCSessionDescription: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly'
       }
     },
     rules: {

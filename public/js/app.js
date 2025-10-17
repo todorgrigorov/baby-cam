@@ -1,6 +1,8 @@
 import { Leader } from './leader.js';
 import { Viewer } from './viewer.js';
 
+const PING_INTERVAL_MS = 15_000;
+
 class App {
   constructor() {
     this.ws = new WebSocket(`wss://${location.host}`);
@@ -9,25 +11,57 @@ class App {
     this.roleHandler = null; // Will hold Leader or Viewer instance
 
     // heartbeat/ping support
-    this._pingInterval = 15_000; // ms
-    this._pingTimer = null;
-    this._lastPong = null;
+    this.pingTimer = null;
+    this.lastPong = null;
 
-    this.handleWS();
+    this.setupConnection();
+    this.setupActions();
   }
 
-  async handleWS() {
+  setupActions() {
+    // Fullscreen button
+    const fsBtn = document.getElementById('fullscreen-btn');
+    const cameraBtn = document.getElementById('camera-switch');
+
+    if (fsBtn) {
+      fsBtn.addEventListener('click', async () => {
+        const [el] = document.getElementsByTagName('video');
+        if (el.requestFullscreen) {
+          await el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen)
+          await el.webkitRequestFullscreen();
+        else if (el.msRequestFullscreen) {
+          await el.msRequestFullscreen();
+        }
+      });
+    }
+
+    // ensure camera button wiring remains functional
+    if (cameraBtn) {
+      cameraBtn.addEventListener('click', async () => {
+        // if roleHandler has switchCamera, call it
+        if (
+          this.roleHandler &&
+          typeof this.roleHandler.switchCamera === 'function'
+        ) {
+          await this.roleHandler.switchCamera();
+        }
+      });
+    }
+  }
+
+  async setupConnection() {
     this.ws.onopen = () => {
       console.log('WebSocket open');
       // start sending pings
-      this._startPinging();
+      this.startPinging();
     };
 
     this.ws.onmessage = async e => {
       const data = JSON.parse(e.data);
       // handle pong separately
       if (data.type === 'pong') {
-        this._lastPong = data.serverTs || Date.now();
+        this.lastPong = data.serverTs || Date.now();
         console.log('PONG from server, ts:', data);
         return;
       }
@@ -69,13 +103,15 @@ class App {
 
     this.ws.onclose = () => {
       console.log('WebSocket closed');
-      this._stopPinging();
+      this.stopPinging();
     };
   }
 
-  _startPinging() {
-    if (this._pingTimer) return;
-    this._pingTimer = setInterval(() => {
+  startPinging() {
+    if (this.pingTimer) {
+      return;
+    }
+    this.pingTimer = setInterval(() => {
       if (this.ws && this.ws.readyState === WebSocket.OPEN) {
         try {
           this.ws.send(JSON.stringify({ type: 'ping', ts: Date.now() }));
@@ -83,13 +119,13 @@ class App {
           console.warn('Failed to send ping', e);
         }
       }
-    }, this._pingInterval);
+    }, PING_INTERVAL_MS);
   }
 
-  _stopPinging() {
-    if (this._pingTimer) {
-      clearInterval(this._pingTimer);
-      this._pingTimer = null;
+  stopPinging() {
+    if (this.pingTimer) {
+      clearInterval(this.pingTimer);
+      this.pingTimer = null;
     }
   }
 }

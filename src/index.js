@@ -81,7 +81,7 @@ wss.on('connection', ws => {
     let data;
     try {
       data = JSON.parse(msg);
-    } catch (e) {
+    } catch {
       console.warn('Received non-JSON message');
       return;
     }
@@ -92,7 +92,9 @@ wss.on('connection', ws => {
     // respond to ping messages so clients can measure round-trip if desired
     if (data.type === 'ping') {
       try {
-        ws.send(JSON.stringify({ type: 'pong', ts: data.ts, serverTs: Date.now() }));
+        ws.send(
+          JSON.stringify({ type: 'pong', ts: data.ts, serverTs: Date.now() })
+        );
       } catch (e) {
         console.warn('Failed to send pong', e);
       }

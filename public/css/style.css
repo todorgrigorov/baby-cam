@@ -90,7 +90,7 @@ video {
 	transition: box-shadow 200ms ease, background-color 200ms ease;
 }
 
-.camera-switch-btn {
+.header-actions button {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
@@ -106,16 +106,16 @@ video {
 	font-weight: 600;
 }
 
-.camera-switch-btn:active {
+.header-actions button:active {
 	transform: translateY(1px) scale(0.997);
 }
 
-.camera-switch-btn[disabled] {
+.header-actions button[disabled] {
 	opacity: 0.6;
 	cursor: not-allowed;
 }
 
-.camera-switch-btn .icon {
+.header-actions button .icon {
 	font-size: 1.05rem;
 }
 
@@ -136,6 +136,7 @@ video {
 	display: flex;
 	justify-content: center;
 	width: 100%;
+	gap: 15px;
 }
 
 
@@ -179,7 +180,7 @@ video {
 		box-shadow: var(--shadow-1);
 	}
 
-	.camera-switch-btn {
+	.header-actions button {
 		box-shadow: 0 4px 14px rgba(2, 6, 23, 0.45);
 		border: 1px solid rgba(255, 255, 255, 0.08);
 		color: var(--btn-text);
