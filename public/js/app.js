@@ -21,30 +21,16 @@ class App {
   setupActions() {
     // Fullscreen button
     const fsBtn = document.getElementById('fullscreen-btn');
-    const cameraBtn = document.getElementById('camera-switch');
 
     if (fsBtn) {
       fsBtn.addEventListener('click', async () => {
         const [el] = document.getElementsByTagName('video');
         if (el.requestFullscreen) {
           await el.requestFullscreen();
-        } else if (el.webkitRequestFullscreen)
-          await el.webkitRequestFullscreen();
-        else if (el.msRequestFullscreen) {
-          await el.msRequestFullscreen();
-        }
-      });
-    }
-
-    // ensure camera button wiring remains functional
-    if (cameraBtn) {
-      cameraBtn.addEventListener('click', async () => {
-        // if roleHandler has switchCamera, call it
-        if (
-          this.roleHandler &&
-          typeof this.roleHandler.switchCamera === 'function'
-        ) {
-          await this.roleHandler.switchCamera();
+        } else if (el.webkitEnterFullScreen) {
+          await el.webkitEnterFullScreen();
+        } else if (el.mozRequestFullScreen) {
+          await el.mozRequestFullScreen();
         }
       });
     }

@@ -101,7 +101,7 @@ video {
 	cursor: pointer;
 	box-shadow: 0 4px 10px rgba(100, 100, 140, 0.06);
 	transition: transform 120ms ease, box-shadow 120ms ease, background-color 200ms ease;
-	font-size: 0.95rem;
+	font-size: 0.7rem;
 	color: var(--btn-text);
 	font-weight: 600;
 }
