@@ -3,7 +3,7 @@ import { Viewer } from './viewer.js';
 
 class App {
   constructor() {
-    this.ws = new WebSocket(`ws://${location.host}`);
+    this.ws = new WebSocket(`wss://${location.host}`);
     this.pcConfig = {};
     this.role = null;
     this.roleHandler = null; // Will hold Leader or Viewer instance

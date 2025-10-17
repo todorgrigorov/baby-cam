@@ -4,7 +4,7 @@ export class Leader {
     this.pcConfig = pcConfig;
     this.pc = null;
     this.localStream = null;
-    this.currentFacingMode = 'environment'; // 'user' for front camera, 'environment' for back camera
+    this.currentFacingMode = 'user'; // 'user' for front camera, 'environment' for back camera
     this.availableCameras = [];
 
     this.setupCameraSwitch();
@@ -63,28 +63,27 @@ export class Leader {
   }
 
   setupCameraSwitch() {
-    document.addEventListener('DOMContentLoaded', () => {
-      const cameraSwitchBtn = document.getElementById('camera-switch');
-      if (cameraSwitchBtn) {
-        // Hide button initially - will be shown when leader starts
-        cameraSwitchBtn.style.display = 'none';
+    const cameraSwitchBtn = document.getElementById('camera-switch');
+    if (cameraSwitchBtn) {
+      // Hide button initially - will be shown when leader starts
+      cameraSwitchBtn.style.display = 'none';
 
-        cameraSwitchBtn.addEventListener('click', async () => {
-          await this.switchCamera();
-        });
-      }
-    });
+      cameraSwitchBtn.addEventListener('click', async () => {
+        await this.switchCamera();
+      });
+    }
   }
 
   async getAvailableCameras() {
     try {
+      await navigator.mediaDevices.getUserMedia({ audio: false, video: true });
       const devices = await navigator.mediaDevices.enumerateDevices();
       this.availableCameras = devices.filter(
         device => device.kind === 'videoinput'
       );
       return this.availableCameras.length > 1;
     } catch (error) {
-      console.error('Error getting available cameras:', error);
+      alert('Error getting available cameras:', error);
       return false;
     }
   }
@@ -112,7 +111,7 @@ export class Leader {
         }
       }
     } catch (error) {
-      console.error('Error initializing camera:', error);
+      alert('Error initializing camera:', error);
       // Fallback to basic video constraints if facingMode fails
       try {
         this.localStream = await navigator.mediaDevices.getUserMedia({
@@ -120,14 +119,16 @@ export class Leader {
           audio: false
         });
       } catch (fallbackError) {
-        console.error('Fallback camera initialization failed:', fallbackError);
+        alert('Fallback camera initialization failed:', fallbackError);
         throw fallbackError;
       }
     }
   }
 
   async switchCamera() {
-    if (!this.localStream) return;
+    if (!this.localStream) {
+      return;
+    }
 
     const cameraSwitchBtn = document.getElementById('camera-switch');
     if (cameraSwitchBtn) {
@@ -162,7 +163,7 @@ export class Leader {
         }
       }
     } catch (error) {
-      console.error('Error switching camera:', error);
+      alert('Error switching camera:', error);
       // Try to restore previous camera if switch failed
       this.currentFacingMode =
         this.currentFacingMode === 'user' ? 'environment' : 'user';
@@ -171,7 +172,7 @@ export class Leader {
         const [localVideo] = document.getElementsByTagName('video');
         localVideo.srcObject = this.localStream;
       } catch (restoreError) {
-        console.error('Failed to restore previous camera:', restoreError);
+        alert('Failed to restore previous camera:', restoreError);
       }
     } finally {
       // Re-enable button

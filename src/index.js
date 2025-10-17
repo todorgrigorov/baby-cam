@@ -4,20 +4,26 @@
  * Main entry point for the baby-cam application
  */
 
+import fs from 'fs';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { WebSocketServer, WebSocket } from 'ws';
-import { createServer } from 'http';
+import { createServer } from 'https';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = process.env.PORT || '8010';
+const PORT = process.env.PORT || '8443';
 const PUBLIC_PATH = path.join(__dirname, '..', 'public');
 
 const app = express();
-const server = createServer(app);
+
+const options = {
+  key: fs.readFileSync(path.join(__dirname, '..', 'certs', 'key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, '..', 'certs', 'cert.pem'))
+};
+const server = createServer(options, app);
 const wss = new WebSocketServer({ server });
 
 let leader = null; // single broadcaster
@@ -109,7 +115,7 @@ wss.on('connection', ws => {
 });
 
 // Start the server
-server.listen(PORT, () => {
-  console.log(`Baby Cam server is running on http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Baby Cam server is running on https://localhost:${PORT}`);
   console.log(`Static files served from: ${PUBLIC_PATH}`);
 });

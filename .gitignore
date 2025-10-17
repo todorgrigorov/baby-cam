@@ -83,6 +83,7 @@ dist
 # Temporary folders
 tmp/
 temp/
+certs/
 
 # Logs
 logs
