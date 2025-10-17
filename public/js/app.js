@@ -16,7 +16,8 @@ class App {
 
       if (data.type === 'role') {
         this.role = data.role;
-        document.title = `${this.role === 'leader' ? '👶' : '👫'} Baby Cam`;
+        const heading = document.getElementById('title');
+        heading.textContent = `${this.role === 'leader' ? '👶' : '👫'} Baby Cam`;
         if (this.role === 'leader') {
           await this.startLeader();
         } else {
@@ -40,10 +41,14 @@ class App {
 
   async startLeader() {
     const [localVideo] = document.getElementsByTagName('video');
-    this.localStream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: false
-    });
+    try {
+      this.localStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: false
+      });
+    } catch (e) {
+      alert(e);
+    }
     localVideo.srcObject = this.localStream;
   }
 

@@ -26,6 +26,7 @@ export default [
       sourceType: 'module',
       globals: {
         console: 'readonly',
+        alert: 'readonly',
         process: 'readonly',
         Buffer: 'readonly',
         __dirname: 'readonly',
