@@ -21,6 +21,10 @@ class App {
         this.role = data.role;
         const heading = document.getElementById('title');
         heading.textContent = `${this.role === 'leader' ? '👶' : '👫'} Baby Cam`;
+        
+        // Update camera switcher visibility immediately when role changes
+        this.updateCameraSwitchVisibility();
+        
         if (this.role === 'leader') {
           await this.startLeader();
         } else {
@@ -49,18 +53,12 @@ class App {
     localVideo.srcObject = this.localStream;
 
     // Show camera switch button only for leaders
-    const cameraSwitchBtn = document.getElementById('camera-switch');
-    if (cameraSwitchBtn) {
-      cameraSwitchBtn.style.display = 'block';
-    }
+    this.updateCameraSwitchVisibility();
   }
 
   async startViewer() {
     // Hide camera switch button for viewers
-    const cameraSwitchBtn = document.getElementById('camera-switch');
-    if (cameraSwitchBtn) {
-      cameraSwitchBtn.style.display = 'none';
-    }
+    this.updateCameraSwitchVisibility();
 
     this.pc = new RTCPeerConnection(this.pcConfig);
 
@@ -132,16 +130,27 @@ class App {
     this.ws.send(JSON.stringify({ type: 'answer', sdp: answer }));
   }
 
+  updateCameraSwitchVisibility() {
+    const cameraSwitchBtn = document.getElementById('camera-switch');
+    if (cameraSwitchBtn) {
+      // Only show camera switch button for leaders
+      cameraSwitchBtn.style.display = this.role === 'leader' ? 'block' : 'none';
+    }
+  }
+
   setupCameraSwitch() {
     document.addEventListener('DOMContentLoaded', () => {
       const cameraSwitchBtn = document.getElementById('camera-switch');
       if (cameraSwitchBtn) {
-        // Hide button initially
+        // Hide button initially - only leaders should see it
         cameraSwitchBtn.style.display = 'none';
 
         cameraSwitchBtn.addEventListener('click', async () => {
+          // Double-check role before allowing camera switch
           if (this.role === 'leader') {
             await this.switchCamera();
+          } else {
+            console.warn('Camera switching is only available for leaders');
           }
         });
       }

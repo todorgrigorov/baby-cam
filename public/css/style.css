@@ -25,9 +25,19 @@ body {
 	justify-content: center;
 }
 
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
 h1 {
-	margin-bottom: 10px;
+	margin: 0;
     color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	font-size: 1.5rem;
 }
 
 video {
@@ -37,34 +47,67 @@ video {
 }
 
 .camera-switch-btn {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	width: 50px;
-	height: 50px;
+	position: static;
+	width: 60px;
+	height: 60px;
+	min-width: 60px;
+	min-height: 60px;
 	border: none;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.9);
+	background: rgba(255, 255, 255, 0.95);
 	backdrop-filter: blur(10px);
-	font-size: 20px;
+	font-size: 28px;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* Better touch target for mobile */
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .camera-switch-btn:hover {
 	background: rgba(255, 255, 255, 1);
-	transform: scale(1.1);
+	transform: scale(1.05);
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Better mobile touch feedback */
 .camera-switch-btn:active {
 	transform: scale(0.95);
+	background: rgba(240, 240, 240, 1);
 }
+
 
 .camera-switch-btn:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
 	transform: none;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+	.header {
+		gap: 10px;
+		margin-bottom: 15px;
+	}
+	
+	h1 {
+		font-size: 1.3rem;
+	}
+	
+	.camera-switch-btn {
+		width: 55px;
+		height: 55px;
+		min-width: 55px;
+		min-height: 55px;
+		font-size: 24px;
+	}
+	
+	body {
+		padding: 20px;
+	}
 }
