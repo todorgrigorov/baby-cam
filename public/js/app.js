@@ -1,5 +1,5 @@
-import { Leader } from './Leader.js';
-import { Viewer } from './Viewer.js';
+import { Leader } from './leader.js';
+import { Viewer } from './viewer.js';
 
 class App {
   constructor() {
